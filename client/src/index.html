@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="loader.css" />
+    <link rel="stylesheet" href="style.scss" />
+    <title>Chat</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="login">
+        <div class="login__inner">
+          <img src="./assets/login.svg" alt="Login photo" class="login__img" />
+          <h2 class="login__title">Авторизация</h2>
+          <p class="login__text">
+            Введите пожалуйста свой ник для дальнейшей авторизации
+          </p>
+          <div class="login__inputs">
+            <input
+              type="text"
+              class="login__input"
+              placeholder="Введите свой ник"
+            />
+            <button class="login__enter-btn btn">Войти</button>
+          </div>
+          <p class="login__text login__error"></p>
+          <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <div class="chat">
+        <div class="chat-sidebar">
+          <div class="chat-sidebar__top">
+            <button class="btn-icon">
+              <img src="./assets/burger.svg" alt="Close sidebar" />
+            </button>
+          </div>
+          <div class="chat-sidebar__content">
+            <ul class="chat-users-list"></ul>
+          </div>
+        </div>
+        <div class="chat-main">
+          <div class="chat-main__inner">
+            <div class="chat-header">
+              <div class="chat-header__inner">
+                <div class="chat-header__title">Чат</div>
+                <div class="chat-header__participants">2 участника</div>
+              </div>
+            </div>
+            <div class="chat-content">
+              <ul class="chat-content-list"></ul>
+            </div>
+            <div class="chat-footer">
+              <div class="chat-footer__input-wrap">
+                <input
+                  type="text"
+                  class="chat-message-input"
+                  placeholder="Введите сообщение..."
+                />
+                <button class="chat-send-btn btn">Отправить</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-photo-loader">
+        <div class="profile-photo-loader__backdrop"></div>
+        <div class="profile-photo-loader__inner">
+          <button class="close-btn btn-icon">
+            <img src="./assets/close.svg" alt="Close loader" />
+          </button>
+          <h3 class="profile-photo-loader__title">Загрузка фото</h3>
+          <div class="profile-photo-loader__block">
+            <label
+              for="profile-photo-file"
+              class="profile-photo-loader__input-label"
+            >
+              <input
+                type="file"
+                id="profile-photo-file"
+                accept=".png, .jpg, .jpeg"
+              />
+              <span class="profile-photo-loader__input">
+                <img
+                  src="./assets/camera.svg"
+                  alt="Select photo"
+                  class="profile-photo-loader__icon"
+                />
+                <img alt="User photo" class="profile-photo-loader__image" />
+              </span>
+              <span class="profile-photo-loader__name"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="profile-photo-preview">
+        <div class="profile-photo-preview__backdrop"></div>
+        <div class="profile-photo-preview__inner">
+          <div class="profile-photo-preview__block">
+            <img alt="User photo" class="profile-photo-preview__image" />
+            <p class="profile-photo-preview__text">
+              Область для профильной фотографии
+            </p>
+            <div class="profile-photo-preview__buttons">
+              <button
+                class="profile-photo-preview__btn profile-photo-preview__cancel-btn"
+              >
+                Отменить
+              </button>
+              <button
+                class="profile-photo-preview__btn profile-photo-preview__save-btn"
+              >
+                Сохранить
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
