@@ -65,7 +65,7 @@ function registerHandlers() {
     const user = users[id];
     if (!user) return;
 
-    log(`${user.name} sent message`);
+    log(`${user.data.name} sent message`);
     broadcast("send_message", { id, message });
   });
 
@@ -73,7 +73,7 @@ function registerHandlers() {
     const user = users[id];
     if (!user) return;
 
-    log(`${user.name} updated profile photo`);
+    log(`${user.data.name} updated profile photo`);
     user.data.profilePhoto = imgData;
     broadcast("update_profile_photo", { id, imgData });
   });

@@ -44,8 +44,7 @@ const handlers = {};
 let users = {};
 let username = "";
 let localUser = null;
-let lastMessageElem;
-let lastMessageId;
+let lastContentItem = null;
 let ws;
 
 function init() {
@@ -273,18 +272,18 @@ function appendUserMessage(id, message) {
   const time = createElementEx("div", "message__time", item);
   time.textContent = format(Date.now(), "KK:mm");
 
-  let root = lastMessageElem;
-  if (lastMessageId !== id || !lastMessageElem) {
-    const contentItem = createElementEx("li", "chat-content-list__item");
+  let contentItem = lastContentItem;
+  if (!lastContentItem || lastContentItem.dataset.id !== id) {
+    contentItem = createElementEx("li", "chat-content-list__item");
     contentItem.dataset.id = id;
 
     if (id === localUser.id) {
       contentItem.classList.add("chat-content-list__item--align-right");
     }
 
-    root = createElementEx("div", "message", contentItem);
+    const messageElem = createElementEx("div", "message", contentItem);
 
-    const inner = createElementEx("div", "message__inner", root);
+    const inner = createElementEx("div", "message__inner", messageElem);
 
     const block = createElementEx("div", "message__block", inner);
     const name = createElementEx("div", "message__name", block);
@@ -298,20 +297,20 @@ function appendUserMessage(id, message) {
 
     createElementEx("ul", "message__list", wrap);
 
-    lastMessageElem = root;
+    lastContentItem = contentItem;
 
     contentList.append(contentItem);
   }
 
-  const list = root.querySelector(".message__list");
+  const list = contentItem.querySelector(".message__list");
   list.append(item);
 
-  lastMessageId = id;
   adjustContentScroll();
 }
 
 function appendInfoMessage(message) {
   const contentItem = createElementEx("li", "chat-content-list__item");
+  lastContentItem = contentItem;
 
   const messageElem = createElementEx("div", "message", contentItem);
   const text = createElementEx("p", "message__info-text", messageElem);
