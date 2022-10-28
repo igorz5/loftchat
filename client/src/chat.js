@@ -376,7 +376,7 @@ function updateChatContent() {
     if (!user) return;
 
     const messageImg = item.querySelector(".message__img");
-    messageImg.src = getUserProfilePhoto(user.id);
+    messageImg.src = getUserProfilePhoto(item.dataset.id);
   });
 }
 

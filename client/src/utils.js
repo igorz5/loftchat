@@ -18,22 +18,9 @@ export const formatParticipants = (amount) => {
   return `${amount} участников`;
 };
 
-export const truncateText = (text, length, suffix) => {
+export const truncateText = (text, length, suffix = "") => {
   if (text.length <= length) return text;
 
-  const end = length - suffix.length;
-  const i = text.lastIndexOf(" ");
-  let newText;
-  if (i === -1) {
-    newText = text.substring(0, end);
-  } else {
-    newText = text.substring(0, i, end);
-    if (newText > end) {
-      newText = newText.substring(newText, end);
-    }
-  }
-
-  console.log(newText);
-
-  return suffix ? `${newText}${suffix}` : newText;
+  const newText = text.substring(0, length - suffix.length);
+  return `${newText}${suffix}`;
 };
