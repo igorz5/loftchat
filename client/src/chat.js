@@ -142,11 +142,12 @@ function registerHandlers() {
     const user = users[id];
     if (!user) return;
 
-    renderUsersList();
-    updateParticipants();
     appendInfoMessage(`${user.name} вышел из комнаты`);
 
     delete users[id];
+
+    renderUsersList();
+    updateParticipants();
   });
 
   addHandler("send_message", ({ id, message }) => {
@@ -259,6 +260,10 @@ function updateParticipants() {
   participants.textContent = formatParticipants(Object.keys(users).length);
 }
 
+function adjustContentScroll() {
+  content.scrollTop = content.scrollHeight;
+}
+
 function appendUserMessage(id, message) {
   const item = createElementEx("li", "message__list-item");
 
@@ -302,6 +307,7 @@ function appendUserMessage(id, message) {
   list.append(item);
 
   lastMessageId = id;
+  adjustContentScroll();
 }
 
 function appendInfoMessage(message) {
@@ -312,6 +318,7 @@ function appendInfoMessage(message) {
   text.textContent = message;
 
   contentList.append(contentItem);
+  adjustContentScroll();
 }
 
 function openPhotoLoader() {
@@ -345,7 +352,6 @@ function getUsername(id) {
 
 function getUserProfilePhoto(id) {
   const user = users[id];
-
   if (!user) return userBasePhoto;
 
   return user.profilePhoto ? user.profilePhoto : userBasePhoto;
@@ -370,7 +376,7 @@ function updateChatContent() {
     if (!user) return;
 
     const messageImg = item.querySelector(".message__img");
-    messageImg.src = user.profilePhoto;
+    messageImg.src = getUserProfilePhoto(user.id);
   });
 }
 
