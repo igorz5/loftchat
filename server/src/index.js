@@ -4,6 +4,9 @@ const cuid = require("cuid");
 const express = require("express");
 const { createServer } = require("http");
 
+const MAX_USERNAME_LENGTH = 32;
+const MAX_MESSAGE_LENGTH = 512;
+
 require("dotenv").config();
 const app = express();
 
@@ -45,11 +48,11 @@ server.listen(port, () => {
 
 function registerHandlers() {
   addHandler("auth", (id, { name }) => {
-    if (!name && name.length === 0) return;
+    if (!name || name.length === 0) return;
 
     log.info(`${name} connected`);
 
-    users[id].data.name = name;
+    users[id].data.name = name.substring(0, MAX_USERNAME_LENGTH);
     const usersData = Object.keys(users).reduce((acc, userId) => {
       if (userId !== id) {
         acc[userId] = users[userId].data;
@@ -65,8 +68,12 @@ function registerHandlers() {
     const user = users[id];
     if (!user) return;
 
+    if (!message || message.length === 0) return;
+
+    const newMessage = message.substring(0, MAX_MESSAGE_LENGTH);
+
     log(`${user.data.name} sent message`);
-    broadcast("send_message", { id, message });
+    broadcast("send_message", { id, message: newMessage });
   });
 
   addHandler("update_profile_photo", (id, { imgData }) => {

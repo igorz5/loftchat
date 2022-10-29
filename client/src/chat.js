@@ -43,8 +43,8 @@ const sendBtn = chat.querySelector(".chat-send-btn");
 const handlers = {};
 let users = {};
 let username = "";
-let localUser = null;
-let lastContentItem = null;
+let localUser;
+let lastContentItem;
 let ws;
 
 function init() {
@@ -181,7 +181,9 @@ function handleWSMessage(e) {
 }
 
 function resetContent() {
-  content.innerHTML = "";
+  contentList.innerHTML = "";
+
+  lastContentItem = null;
 }
 
 function showLogin() {
@@ -200,7 +202,11 @@ function hideLogin() {
 
 function onDisconnected() {
   users = {};
+  username = "";
   localUser = null;
+  ws = null;
+
+  loginNameInput.value = "";
 
   showLogin();
 }
@@ -321,7 +327,7 @@ function appendInfoMessage(message) {
 }
 
 function openPhotoLoader() {
-  photoLoader.classList.add("profile-photo-loader--active");
+  photoLoader.classList.add("modal--active");
   photoLoaderName.textContent = localUser.name;
 
   if (localUser.profilePhoto) {
@@ -331,17 +337,17 @@ function openPhotoLoader() {
 }
 
 function closePhotoLoader() {
-  photoLoader.classList.remove("profile-photo-loader--active");
+  photoLoader.classList.remove("modal--active");
 }
 
 function openPhotoPreview(imgData) {
-  photoPreview.classList.add("profile-photo-preview--active");
+  photoPreview.classList.add("modal--active");
 
   photoPreviewImage.src = imgData;
 }
 
 function closePhotoPreview() {
-  photoPreview.classList.remove("profile-photo-preview--active");
+  photoPreview.classList.remove("modal--active");
 }
 
 function getUsername(id) {

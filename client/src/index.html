@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="loader.css" />
-    <link rel="stylesheet" href="style.scss" />
     <title>Chat</title>
   </head>
   <body>
@@ -22,6 +20,7 @@
               type="text"
               class="login__input"
               placeholder="Введите свой ник"
+              maxlength="32"
             />
             <button class="login__enter-btn btn">Войти</button>
           </div>
@@ -66,6 +65,8 @@
                   type="text"
                   class="chat-message-input"
                   placeholder="Введите сообщение..."
+                  autocomplete="off"
+                  maxlength="512"
                 />
                 <button class="chat-send-btn btn">Отправить</button>
               </div>
@@ -73,8 +74,8 @@
           </div>
         </div>
       </div>
-      <div class="profile-photo-loader">
-        <div class="profile-photo-loader__backdrop"></div>
+      <div class="profile-photo-loader modal">
+        <div class="modal__backdrop"></div>
         <div class="profile-photo-loader__inner">
           <button class="close-btn btn-icon">
             <img src="./assets/close.svg" alt="Close loader" />
@@ -103,8 +104,8 @@
           </div>
         </div>
       </div>
-      <div class="profile-photo-preview">
-        <div class="profile-photo-preview__backdrop"></div>
+      <div class="profile-photo-preview modal">
+        <div class="modal__backdrop"></div>
         <div class="profile-photo-preview__inner">
           <div class="profile-photo-preview__block">
             <img alt="User photo" class="profile-photo-preview__image" />
